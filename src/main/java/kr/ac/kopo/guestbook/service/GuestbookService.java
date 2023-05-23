@@ -7,8 +7,12 @@ import kr.ac.kopo.guestbook.entity.Guestbook;
 
 public interface GuestbookService {
     Long register(GuestbookDTO dto);
+    GuestbookDTO read(Long gno);
 
     PageResultDTO<GuestbookDTO,Guestbook> getList(PageRequestDTO requestDTO);
+
+    void remove(Long gno);
+    void modify(GuestbookDTO dto);
 
     default Guestbook dtoToEntity(GuestbookDTO dto){
         Guestbook entity = Guestbook.builder().gno(dto.getGno())
