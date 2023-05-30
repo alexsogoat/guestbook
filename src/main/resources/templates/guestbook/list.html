@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <h1 class="mt-4">GuestBook List Page
@@ -48,21 +49,39 @@
           <a class="page-link" th:href="@{/guestbook/list(page=${result.end +1})}">Next</a>
         </li>
       </ul>
-        <div class="modal" tabindex="-1" role="dialog" id="myModal">
-            <div class="modal-dialog" role="document">
+      <form action="/guestbood/list" method="get" id="searchForm">
+          <div class="input-group">
+          <input type="hidden" name="page" value="1">
+          <div class="input-group-prepend">
+              <select class="custom-select" name="type">
+                  <option th:value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                  <option th:value="t" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
+                  <option th:value="t" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>
+                  <option th:value="t" th:selected="${pageRequestDTO.type == 'tc'}">제목 + 내용</option>
+                  <option th:value="t" th:selected="${pageRequestDTO.type == 'tcw'}">제목 + 내용 + 작성자</option>
+              </select>
+          </div>
+          <input class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+              <div class="input-group-append" id="button-addon4">
+                  <button class="btn btn-outline-secondary btn-search" type="button">Search</button>
+                  <button class="btn btn-outline-secondary btn-clear" type="button">Clear</button>
+              </div>
+          </div>
+      </form>
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title">[[${msg}]]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                onclick="$('.modal').hide()"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Modal body text goes here.</p>
+                        <p>Registered Successfully</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="$('.modal').hide()">Confirm</button>
                     </div>
                 </div>
             </div>

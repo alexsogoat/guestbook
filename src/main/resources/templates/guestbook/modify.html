@@ -4,7 +4,6 @@
   <th:block th:fragment="content">
     <h1 class="mt-4">GuestBook Modify Page</h1>
     <form action="/guestbook/modify" method="post">
-      <input type="hidden" name="page" th:value="${requestDTO.page}">
     <div class="form-group">
       <label>Gno</label>
       <input type="text" class="form-control" name="gno" th:value="${dto.gno}" readonly>
@@ -25,11 +24,12 @@
       <label>RegDate</label>
       <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate,'yyyy/MM/dd HH:mm:ss')}" readonly>
     </div>
+    <input type="hidden" name="page" th:value="${requestDTO.page}">
     </form>
     <button type="button" class="btn btn-primary modifyBtn">Modify</button>
-    <button type="button" class="btn btn-info" listBtn>List</button>
-    <button type="button" class="btn btn-danger" removeBtn>Remove</button>
-</th:block>
+    <button type="button" class="btn btn-info listBtn">List</button>
+    <button type="button" class="btn btn-danger removeBtn">Remove</button>
+
   <script th:inline="javascript">
     var actionForm = $("form");
     $(".removeBtn").click(function (){
@@ -39,7 +39,7 @@
       actionForm.submit();
     });
     $(".modifyBtn").click(function (){
-      if(!confirm("수정하시겠습니가?")){
+      if(!confirm("수정하시겠습니까?")){
         return;
       }
       actionForm
@@ -58,11 +58,5 @@
       actionForm.submit();  //확인 후 주석 해제
     });
   </script>
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+  </th:block>
+</th:block>

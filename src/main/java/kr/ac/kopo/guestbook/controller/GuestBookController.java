@@ -38,7 +38,6 @@ public class GuestBookController {
     @PostMapping("/register")
     public String registerPost(GuestbookDTO dto, RedirectAttributes redirectAttributes){
         log.info("dto..."+dto);
-
         Long gno = service.register(dto);
         redirectAttributes.addFlashAttribute("msg",gno);
         return "redirect:/guestbook/list";
