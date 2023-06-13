@@ -1,17 +1,11 @@
 package kr.ac.kopo.guestbook.dto;
 
-import kr.ac.kopo.guestbook.entity.Guestbook;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Builder
 @AllArgsConstructor
@@ -31,4 +25,5 @@ public class PageRequestDTO {
 
         return PageRequest.of(page-1, size, sort);
     }
+
 }
